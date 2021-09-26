@@ -1,0 +1,59 @@
+﻿@page
+@model FileOperations.Pages.TopFrequentWordsModel
+@{
+}
+
+<div style="margin-top:30px;">
+    <form enctype="multipart/form-data" method="post" style="width:500px">
+        <div>
+            <dl>
+                <dt>
+                    <label asp-for="FormFile"></label>
+                </dt>
+                <dd>
+                    <input asp-for="FormFile" type="file">
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <input asp-page-handler="File" type="submit" value="Upload">
+        </div>
+        <div style="padding-top:20px">
+            <table class="table" style="table-layout:fixed" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Word
+                        </th>
+                        <th>
+                            Count
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.FrequentWords != null)
+                    {
+                        @foreach (string key in Model.FrequentWords.Keys)
+                        {
+                            <tr>
+                                <td width="75%"><div style="overflow: hidden; text-overflow: ellipsis">
+    @key
+</div>
+                                </td>
+                                <td width="25%">
+                                    @Model.FrequentWords[key]
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+            </table>
+        </div>
+        <div>
+            @if (!string.IsNullOrEmpty(@Model.ErrorMessage))
+            {
+                <p style="color:red">Error: @Model.ErrorMessage!</p>
+            }
+        </div>
+    </form>
+</div>
