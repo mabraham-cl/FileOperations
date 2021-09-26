@@ -21,7 +21,7 @@ namespace FileOperations_UnitTest
         [Test]
         public void TextFileOperations_UnitTest_FetchFrequentWords()
         {          
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "content.txt");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "mobydick.txt");
            
             Mock<IFileSystem> fileSystemMock = new Mock<IFileSystem>();
             Mock<IFileStreamFactory> fileStream = new Mock<IFileStreamFactory>();
@@ -77,7 +77,7 @@ namespace FileOperations_UnitTest
 
             TextFileOperations textFileOperations = new TextFileOperations(fileSystemMock.Object, mockStringHelper.Object);
 
-            textFileOperations.FileName = Path.Combine(Directory.GetCurrentDirectory(), "NoFolder", "content.txt");
+            textFileOperations.FileName = Path.Combine(Directory.GetCurrentDirectory(), "NoFolder", "mobydick.txt");
 
             textFileOperations.FetchFrequentWords();
 
@@ -100,11 +100,31 @@ namespace FileOperations_UnitTest
             Assert.AreEqual("File is too large to process.", textFileOperations.ErrorMessage);
         }
 
-        private string content = @"0123456789ABCDEF
-/* ********************************************** */
-	Table with TABs (09)
-    Table with TABs (09)
-	1       2       3
-	3.14	6.28	9.42";
+        private string content = @"**The Project Gutenberg Etext of Moby Dick, by Herman Melville**
+            #3 in our series by Herman Melville
+
+            This Project Gutenberg version of Moby Dick is based on a combination
+            of the etext from the ERIS project at Virginia Tech and another from
+            Project Gutenberg's archives, as compared to a public-domain hard copy.
+
+            Copyright laws are changing all over the world, be sure to check
+            the copyright laws for your country before posting these files!!
+
+            Please take a look at the important information in this header.
+            We encourage you to keep this file on your own disk, keeping an
+            electronic path open for the next readers.  Do not remove this.
+
+
+            **Welcome To The World of Free Plain Vanilla Electronic Texts**
+
+            **Etexts Readable By Both Humans and By Computers, Since 1971**
+
+            *These Etexts Prepared By Hundreds of Volunteers and Donations*
+
+            Information on contacting Project Gutenberg to get Etexts, and
+            further information is included below.  We need your donations.
+
+
+            Title:  Moby Dick; or The Whale";
             }
 }
